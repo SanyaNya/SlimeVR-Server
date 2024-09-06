@@ -7,8 +7,8 @@ import java.nio.charset.StandardCharsets
 class UDPProtocolParser {
 	@Throws(IOException::class)
 	fun parse(buf: ByteBuffer, connection: UDPDevice?): Array<UDPPacket?> {
-		val packetId = buf.int
-		val packetNumber = buf.long
+		val packetId = buf.get().toInt()
+		val packetNumber = buf.short.toLong()
 		if (connection != null) {
 			connection.isNextPacket(packetNumber))
 			connection.lastPacket = System.currentTimeMillis()
