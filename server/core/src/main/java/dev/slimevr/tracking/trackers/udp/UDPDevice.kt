@@ -6,6 +6,7 @@ import dev.slimevr.tracking.trackers.Tracker
 import java.net.InetAddress
 import java.net.SocketAddress
 import java.util.concurrent.ConcurrentHashMap
+import io.eiren.util.logging.LogManager;
 
 class UDPDevice(
 	var address: SocketAddress,
@@ -60,7 +61,7 @@ class UDPDevice(
 		//because packets always sequential in standard setup slime->router->pc
 
 		//Log dropped packets
-		val dropped = abs(packetId - lastPacketNumber) - 1
+		val dropped = Math.abs(packetId - lastPacketNumber) - 1
 		if(dropped > 0) LogManager.log.debug("Dropping " + dropped + " packets!")
 
 		lastPacketNumber = packetId

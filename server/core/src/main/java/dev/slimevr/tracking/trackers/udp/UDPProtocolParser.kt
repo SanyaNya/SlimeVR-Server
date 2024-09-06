@@ -10,7 +10,7 @@ class UDPProtocolParser {
 		val packetId = buf.get().toInt()
 		val packetNumber = buf.short.toLong()
 		if (connection != null) {
-			connection.isNextPacket(packetNumber))
+			connection.isNextPacket(packetNumber)
 			connection.lastPacket = System.currentTimeMillis()
 			connection.trackers.forEach { (_, tracker) ->
 				tracker.heartbeat()
