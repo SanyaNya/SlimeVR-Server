@@ -10,12 +10,7 @@ class UDPProtocolParser {
 		val packetId = buf.int
 		val packetNumber = buf.long
 		if (connection != null) {
-			if (!connection.isNextPacket(packetNumber)) {
-				// Skip packet because it's not next
-				throw IOException(
-					"Out of order packet received: id $packetId, number $packetNumber, last ${connection.lastPacketNumber}, from $connection",
-				)
-			}
+			connection.isNextPacket(packetNumber))
 			connection.lastPacket = System.currentTimeMillis()
 			connection.trackers.forEach { (_, tracker) ->
 				tracker.heartbeat()

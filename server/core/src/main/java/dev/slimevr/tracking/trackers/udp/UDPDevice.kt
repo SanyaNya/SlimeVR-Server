@@ -56,7 +56,13 @@ class UDPDevice(
 	var firmwareFeatures = FirmwareFeatures()
 
 	fun isNextPacket(packetId: Long): Boolean {
-		if (packetId != 0L && packetId <= lastPacketNumber) return false
+		//remove check if this is next packet
+		//because packets always sequential in standard setup slime->router->pc
+
+		//Log dropped packets
+		val dropped = abs(packetId - lastPacketNumber) - 1
+		if(dropped > 0) LogManager.log.debug("Dropping " + dropped + " packets!")
+
 		lastPacketNumber = packetId
 		return true
 	}
